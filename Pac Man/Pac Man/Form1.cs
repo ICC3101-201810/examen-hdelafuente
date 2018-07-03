@@ -12,6 +12,13 @@ namespace Pac_Man
 {
     public partial class Form1 : Form
     {
+        /*Para agregar una fruto o fantasma:
+         1. Agregar un PictureBox
+         2. Agregar una localizacion random en el constructor del form
+         3. Agregar intersecciones en los if() de los metodos IntersectsGhost o IntersectsFruit
+         4. Darle una imagen a la fruta o fantasma
+             */
+             
         Data data = new Data();
         Dictionary<Player, int> top = Data.Load_Data();
         Random r = new Random();
