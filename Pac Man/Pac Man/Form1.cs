@@ -13,6 +13,7 @@ namespace Pac_Man
     public partial class Form1 : Form
     {
         Data data = new Data();
+        Dictionary<Player, int> top = Data.Load_Data();
         Random r = new Random();
         Random r2 = new Random();
         Player player = new Player();
@@ -63,26 +64,27 @@ namespace Pac_Man
         {
             if (pacman.Bounds.IntersectsWith(red_ghost.Bounds) || pacman.Bounds.IntersectsWith(pink_ghost.Bounds))
             {
-                if (data.scores.Keys.Contains(player))
+                if (top.Keys.Contains(player))
                 {
                     timer1.Stop();
-                    data.scores.Remove(player);
+                    top.Remove(player);
                     player.score = score;
-                    data.scores.Add(player, score);
-                    Data.Save_Data(data.scores);
+                    top.Add(player, score);
+                    Data.Save_Data(top);
                     Game_Over.Visible = true;
                     restart.Visible = true;
-                    MessageBox.Show("Obtained Score: " + score);
+                    MessageBox.Show("Obtained Score: " + score , "Game Over");
                     return true;
                 }
                 else
                 {
                     timer1.Stop();
-                    data.scores.Add(player, score);
-                    Data.Save_Data(data.scores);
+                    player.score = score;
+                    top.Add(player, score);
+                    Data.Save_Data(top);
                     Game_Over.Visible = true;
                     restart.Visible = true;
-                    MessageBox.Show("Obtained Score: " + score);
+                    MessageBox.Show("Obtained Score: " + score, "Game Over");
                     return true;
                 }
             }
